@@ -1,0 +1,22 @@
+#!/bin/csh
+# Used to automate based on the hostname of your system, helpful if you rotate through computers with different setups
+
+# Sets hostname
+# Just `hostname -s` works for most environments
+set my_host=`hostname -s | cut -d'.'-f 1 | tr '[:upper:]' '[:lower:]'
+
+# Input hostname into (hostname)
+if $my_host != (hostname) then
+echo "Wrong desk, not running setup"
+else echo "Welcome Master, running desk setup"
+
+# Input commands here
+
+
+
+
+
+
+
+# Ending
+endif
