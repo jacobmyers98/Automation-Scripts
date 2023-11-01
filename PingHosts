@@ -21,4 +21,6 @@ if ping -c 2 -W2 $line > /dev/null 2>&1
   else
     echo "$line timeout" | tee -a 'timeout.txt'
   fi
+# if file is runaway do 'touch /tmp/stopit to brake script
+[ -f /tmp/stopit ] && break 
 done > 'outputfile.txt'
