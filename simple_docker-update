@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#path to docker dir
+cd /home/torrent/docker_torrent
+docker-compose down
+
+#pulling new images
+docker-compose pull
+docker-compose up -d
+echo "docker update complete"
