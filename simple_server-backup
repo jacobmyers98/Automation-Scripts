@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#ensure you mount all partitions or backup will not complete
+#add folders you dont want backedup in list below
+echo "starting backup"
+sudo tar czf /backup.tar.gz \
+    --exclude=/backup.tar.gz \
+    --exclude=/dev \
+    --exclude=/mnt \
+    --exclude=/proc \
+    --exclude=/sys \
+    --exclude=/tmp \
+    --exclude=/media \
+    --exclude=/lost+found \
+    /
+
+echo "backup complete"
