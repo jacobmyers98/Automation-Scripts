@@ -9,18 +9,31 @@ echo -n "" > failed.txt
 # remove file in /tmp/ and throw output in bin, file is used to stop runaway script
 rm -f /tmp/stopit 2>/dev/null
 
-cat "path/to/dir/list.txt" | while read line
+# maps the file to 'hosts' variable
+mapfile -t hosts < path/to/file.txt
+# for every line in variable
+for line in ${hosts[@]}
 
 do
 
 # send ping to /dev/null and send output to where input goes
 if ping -c 2 -W2 $line > /dev/null 2>&1
-  then
-# echo then put in these files:
-  echo "$line successful" | tee -a 'successful.txt' 
-  else
-  echo "$line timeout" | tee -a 'timeout.txt'
+    then
+# echo line in ping.txt without displaying to screen
+  echo "$line" >> 'ping.txt'
+# command execution, ssh options follow by execute the command at this location, throw the errors in /dev/null and throw into a file and screen (CLI)
+    ssh -o NumberOfPasswordPrompts=0 -o PasswordAuthentication=no -o StrictHostKeyChecking=no -o CheckHostIP=no -o ConnectionTimeout=20 ServerAliveInterval=35 -t $line "usr/bin/uname -nr" 2>/dev/null | tee -a sshgood.txt
+# previous line doesnt equal 0 (success) then
+    if [ $? != 0 ]
+        then
+# ssh fails then echo line to CLI and throw in failed.txt
+        echo "$line failed ssh" | tee -a 'failed.txt'
+    fi
+    else
+    echo "$line timeout" | tee -a 'failed.txt'
+
 fi
+
 # if script is runaway do 'touch /tmp/stopit' to stop script
 [ -f /tmp/stopit ] && break 
 done
