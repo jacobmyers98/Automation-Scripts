@@ -1,0 +1,26 @@
+#!/bin/bash
+# script used to pull from a file and ping each host.
+
+# wipe file or create if not there
+echo -n "" > pinggood.txt
+echo -n "" > sshgood.txt
+echo -n "" > failed.txt
+
+# remove file in /tmp/ and throw output in bin, file is used to stop runaway script
+rm -f /tmp/stopit 2>/dev/null
+
+cat "path/to/dir/list.txt" | while read line
+
+do
+
+# send ping to /dev/null and send output to where input goes
+if ping -c 2 -W2 $line > /dev/null 2>&1
+  then
+# echo then put in these files:
+  echo "$line successful" | tee -a 'successful.txt' 
+  else
+  echo "$line timeout" | tee -a 'timeout.txt'
+fi
+# if script is runaway do 'touch /tmp/stopit' to stop script
+[ -f /tmp/stopit ] && break 
+done
