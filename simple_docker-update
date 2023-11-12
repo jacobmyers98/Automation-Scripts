@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #path to docker dir
-cd /home/torrent/docker_torrent
+cd /home/torrent/docker_torrents
 docker-compose down
 
 #pulling new images
