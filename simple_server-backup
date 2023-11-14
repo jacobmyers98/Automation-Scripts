@@ -12,6 +12,7 @@ sudo tar czf /backup.tar.gz \
     --exclude=/tmp \
     --exclude=/media \
     --exclude=/lost+found \
+    --exclude=/home/torrent/docker_torrents/mnt \
     /
 
 echo "backup complete"
