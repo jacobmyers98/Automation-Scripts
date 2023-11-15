@@ -1,4 +1,8 @@
 #!/bin/bash
+# change 'apt' to Linux OS of choice
+# run as root to avoid sudo 
+apt update
+apt upgrade
 
 #path to docker dir
 cd /home/torrent/docker_torrents
