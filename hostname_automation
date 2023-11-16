@@ -6,9 +6,11 @@
 set my_host=`hostname -s | cut -d'.'-f 1 | tr '[:upper:]' '[:lower:]'
 
 # Input hostname into (hostname)
-if $my_host != (hostname) then
-echo "Wrong desk, not running setup"
-else echo "Welcome Master, running desk setup"
+if $my_host != (hostname) 
+  then
+    echo "Wrong desk, not running setup"
+  else 
+    echo "Welcome Master, running desk setup"
 
 # Input commands here
 
