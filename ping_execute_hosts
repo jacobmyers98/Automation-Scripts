@@ -1,5 +1,5 @@
 #!/bin/bash
-# script used to pull from a file and ping each host.
+# script used to pull from a file and ping each host, then test ssh and echo back if failure happens
 
 # wipe file or create if not there
 echo -n "" > pinggood.txt
