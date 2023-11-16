@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Simple check of your cpu idle useage to determine if you're overloaded.
+# Attach to a cron job for automation
+
+# Make a variable called cpu and run the command to check usage, if the 8th column (cpu idle) is higher than 51% then print low, else print high for high usage. 
+cpu=$(top -n1 | awk '/^%Cpu/{if ($8 > 50)    {print "low"}    else {print "high"} }')
+  
+# Make a variable with hostname cutting out all the extra stuff, might need to tweak based on user preference.
+host=$(hostname -s | cut -d'.'-f 1 | tr '[:upper:]' '[:lower:]')
+  
+# Make a variable called date with the date in year, month, day format and hour, minute, second format.
+date=$(date '+%Y-%m-%d %H:%M:%S')
+
+# If the CPU is labeled as "high" from 'awk' then put info in warning.txt in certain directory, else echo to CLI.
+if [ "cpu" = "high" ]
+  then
+    echo "$host $date CPU overloaded" >> /home/user/warning.txt
+  else
+    echo "No issues, waiting another hour"
+
+fi
