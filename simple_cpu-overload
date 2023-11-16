@@ -15,8 +15,8 @@ date=$(date '+%Y-%m-%d %H:%M:%S')
 # If the CPU is labeled as "high" from 'awk' then put info in warning.txt in certain directory, else echo to CLI.
 if [ "$cpu" = "high" ]
   then
-    echo "$host $date CPU overloaded" >> /home/user/warning.txt
+  echo "$host $date CPU overloaded" >> /home/user/warning.txt
   else
-    echo "No issues, waiting another hour"
+  echo "No issues, waiting another hour"
 
 fi
