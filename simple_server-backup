@@ -3,7 +3,11 @@
 #ensure you mount all partitions or backup will not complete
 #add folders you dont want backedup in list below
 echo "starting backup"
-sudo tar czf /backup.tar.gz \
+
+date=$(date '+%Y-%m-%d %H:%M:%S')
+
+
+sudo tar czf /mnt/Media/_backup_{$date}.tar.gz \
     --exclude=/backup.tar.gz \
     --exclude=/dev \
     --exclude=/mnt \
