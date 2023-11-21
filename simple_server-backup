@@ -10,6 +10,8 @@ echo "starting backup"
 
 date=$(date '+%Y-%m-%d')
 
+# sets so you can see all the output of files being tar balled
+set -x
 
 sudo tar czf /mnt/Media/"$1_backup_$date.tar.gz" \
     --exclude=/dev \
@@ -22,9 +24,18 @@ sudo tar czf /mnt/Media/"$1_backup_$date.tar.gz" \
     --exclude=/home/torrent/docker_torrents/mnt \
     /
 
-#deletes backup older than 3 months
-find /mnt/backup/*.tar.gz -mmin +131400 -delete
+# sets so you dont have to see the rest of the output
+set +x
 
-chmod 744 /mnt/backup/*.tar.gz
+# if you can cd into backup directory then move the recent backup to that directory, and delete old backups else skip
+if cd /mnt/backup
+    then
+    mv /mnt/Media/"$1_backup_$date.tar.gz" /mnt/backup/
+# deletes backup older than 3 months
+    find /mnt/backup/*.tar.gz -mmin +131400 -delete
+    chmod 744 /mnt/backup/*.tar.gz
+    else
+    echo "no backup directory mounted, skipping"
+fi
 
 echo "backup complete"
