@@ -1,13 +1,17 @@
 #!/bin/bash
 
-#ensure you mount all partitions or backup will not complete
-#add folders you dont want backedup in list below
+# add name of server you want to backup as first option when running script.
+# ex. "./simple_server-backup game" will output "game_backup_(current date).tar.gz"
+
+# ensure you mount all partitions or backup will not complete
+# add folders you dont want backedup in list below
+
 echo "starting backup"
 
-date=$(date '+%Y-%m-%d %H:%M:%S')
+date=$(date '+%Y-%m-%d')
 
 
-sudo tar czf /mnt/Media/_backup_{$date}.tar.gz \
+sudo tar czf /mnt/Media/"$1_backup_$date.tar.gz" \
     --exclude=/backup.tar.gz \
     --exclude=/dev \
     --exclude=/mnt \
