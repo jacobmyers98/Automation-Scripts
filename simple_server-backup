@@ -22,4 +22,9 @@ sudo tar czf /mnt/Media/"$1_backup_$date.tar.gz" \
     --exclude=/home/torrent/docker_torrents/mnt \
     /
 
+#deletes backup older than 3 months
+find /mnt/backup/*.tar.gz -mmin +131400 -delete
+
+chmod 744 /mnt/backup/*.tar.gz
+
 echo "backup complete"
