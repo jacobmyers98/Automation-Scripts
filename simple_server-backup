@@ -12,7 +12,6 @@ date=$(date '+%Y-%m-%d')
 
 
 sudo tar czf /mnt/Media/"$1_backup_$date.tar.gz" \
-    --exclude=/backup.tar.gz \
     --exclude=/dev \
     --exclude=/mnt \
     --exclude=/proc \
