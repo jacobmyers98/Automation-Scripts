@@ -3,8 +3,17 @@
 # Update for pterodactyl automated by simple_update.yml in ansible playbooks
 
 cd /var/www/pterodactyl
+
 php artisan down
-[ $? -ne 0 ] && exit
+if
+  [ $? -eq 0]
+then 
+  echo "artisan down"
+else
+  echo "$? failed" | tee -a /logs/ptero.txt
+  exit
+fi
+
 curl -L https://github.com/pterodactyl/panel/releases/latest/download/panel.tar.gz | tar -xzv
 chmod -R 755 storage/* bootstrap/cache
 composer install --no-dev --optimize-autoloader
@@ -12,11 +21,48 @@ php artisan view:clear
 php artisan config:clear
 php artisan migrate --seed --force
 chown -R www-data:www-data /var/www/pterodactyl/*
+
 php artisan queue:restart
+if
+  [ $? -eq 0]
+then 
+  echo "artisan restarted"
+else
+  echo "$? failed" | tee -a /logs/ptero.txt
+  exit
+fi
+
 php artisan up
+if
+  [ $? -eq 0]
+then 
+  echo "artisan up"
+else
+  echo "$? failed" | tee -a /logs/ptero.txt
+  exit
+fi
+
 systemctl stop wings
+if
+  [ $? -eq 0]
+then 
+  echo "wings stopped"
+else
+  echo "$? failed" | tee -a /logs/ptero.txt
+  exit
+fi
+
 curl -L -o /usr/local/bin/wings "https://github.com/pterodactyl/wings/releases/latest/download/wings_linux_$([[ "$(uname -m)" == "x86_64" ]] && echo "amd64" || echo "arm64")"
 chmod u+x /usr/local/bin/wings
-systemctl restart wings
 
-echo "done"
+systemctl restart wings
+if
+  [ $? -eq 0]
+then 
+  echo "wings restarted"
+else
+  echo "$? failed" | tee -a /logs/ptero.txt
+  exit
+fi
+
+echo "Update finished successfully!"
