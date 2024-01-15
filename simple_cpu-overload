@@ -17,6 +17,5 @@ if [ "$cpu" = "high" ]
   then
   echo "$host $date CPU overloaded" >> /home/user/warning.txt
   else
-  echo "No issues, waiting another hour"
-
+  echo "No issues with CPU utilization on $date"
 fi
