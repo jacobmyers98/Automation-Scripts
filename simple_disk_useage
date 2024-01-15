@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Simple check of your disk useage to determine if you're above 90%.
+# Attach to a cron job for automation
+
+# Make a variable called disk and run the command to check usage,  then print low, else print high for high usage. 
+disk=$(df -Ph /dev | awk 'NR == 2{print $5+0}')
+  
+# Make a variable with hostname cutting out all the extra stuff, might need to tweak based on user preference.
+host=$(hostname -s | cut -d'.'-f 1 | tr '[:upper:]' '[:lower:]')
+  
+# Make a variable called date with the date in year, month, day format and hour, minute, second format.
+date=$(date '+%Y-%m-%d %H:%M:%S')
+
+# If the disk is labeled as "high" from 'awk' then put info in warning.txt in certain directory, else echo to CLI.
+if [ "$disk" -gt 85 ]
+  then
+  echo "$host $date disk useage high!" >> /home/user/warning.txt
+  else
+  echo "No issues with disk useage on $date"
+fi
