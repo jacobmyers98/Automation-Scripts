@@ -10,5 +10,14 @@ docker-compose down
 
 #pulling new images
 docker-compose pull
+if
+  [ $? -eq 0]
+then 
+  echo "pull successful"
+else
+  echo "$? failed"
+  exit
+fi
+
 docker-compose up -d
 echo "docker update complete"
