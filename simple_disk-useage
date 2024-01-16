@@ -12,7 +12,7 @@ host=$(hostname -s | cut -d'.'-f 1 | tr '[:upper:]' '[:lower:]')
 # Make a variable called date with the date in year, month, day format and hour, minute, second format.
 date=$(date '+%Y-%m-%d %H:%M:%S')
 
-# Throw ouput into .txt for grpahical analysis
+# Throw ouput into .txt for graphical analysis
 echo "$disk" >> '/home/user/disk_graphic.txt'
 
 # If the disk is labeled as "high" from 'awk' then put info in warning.txt in certain directory, else echo to CLI. If disk useage is greater than 85% then echo high useage to warning text else echo to startup on profile.
