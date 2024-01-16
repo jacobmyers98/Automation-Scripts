@@ -1,4 +1,17 @@
 #!/bin/bash
 
 #Uses simple_cpu-overload & simple_disk-useage to form a graph and showcase the last 30 days.
+minval=0
+maxval=100
+file='/home/user/cpu_graphic.txt'
+file2='/home/user/disk_graphic.txt'
 
+
+gnuplot --persist <<- EOF
+set xlabel "Days"
+set ylabel "Percentage"
+set yrange [$minval:$maxval]
+set title "Server Useage"
+set term png
+plot "${file}" with lines
+EOF
