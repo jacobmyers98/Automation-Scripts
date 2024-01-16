@@ -1,0 +1,4 @@
+#!/bin/bash
+
+#Uses simple_cpu-overload & simple_disk-useage to form a graph and showcase the last 30 days.
+
