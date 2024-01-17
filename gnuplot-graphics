@@ -8,10 +8,40 @@ file2='/home/user/disk_graphic.txt'
 
 
 gnuplot --persist <<- EOF
+#set xlabel "Days"
+#set ylabel "Percentage"
+#set yrange [$minval:$maxval]
+#set title "Server Useage"
+#set term png
+
+set size 1,1
+set multiplot
+# First Multiplot
+set size 0.5,0.5
+set origin 0,0.5
 set xlabel "Days"
-set ylabel "Percentage"
+set ylabel "CPU Useage"
 set yrange [$minval:$maxval]
+set ytics 0,10
+set xtics 1,1
 set title "Server Useage"
 set term png
-plot "${file}" with lines
+plot "${file}" w l lw 0.5 lc rgb 'black'
+set ytics auto
+set xtics auto
+
+# Second Multiplot
+set origin 0,0.5
+set xlabel "Days"
+set ylabel "Disk Useage"
+set yrange [$minval:$maxval]
+set ytics 0,10
+set xtics 1,1
+set title "Server Useage"
+set term png
+plot "${file2}" w l lw 0.5 lc rgb 'black'
+set ytics auto
+set xtics auto
+
+unset multiplot
 EOF
