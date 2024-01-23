@@ -1,5 +1,10 @@
 #!/bin/csh
+
+# Author: Jacob M
+# Last edited on: 1/23/2024
+
 # Used to automate based on the hostname of your system, helpful if you rotate through computers with different setups
+
 
 # Sets hostname, csh requires "set variable=`command`"
 # Just `hostname -s` works for most environments
