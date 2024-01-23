@@ -1,5 +1,9 @@
 #!/bin/bash
 
+
+# Author: Jacob M
+# Last edited on: 1/23/2024
+
 # Simple check of your disk useage to determine if you're above 90%.
 # Attach to a cron job for automation
 
