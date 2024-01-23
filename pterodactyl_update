@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Author: Jacob M
+# Last edited on: 1/23/2024
+
 # Update for pterodactyl automated by simple_update.yml in ansible playbooks
 
 touch /logs/ptero.txt
