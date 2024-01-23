@@ -16,7 +16,7 @@ date=$(date '+%Y-%m-%d')
 # sets so you can see all the output of files being tar balled
 set -x
 
-sudo tar -czf /mnt/Media/"$1_backup_$date.tar.gz" \
+sudo tar -czf /mnt/Media/"${1}_backup_${date}.tar.gz" \
     --exclude=/dev \
     --exclude=/mnt \
     --exclude=/proc \
