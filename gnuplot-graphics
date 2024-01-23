@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Author: Jacob M
+# Last edited on: 1/23/2024
+########Unfinished##########
+
 #Uses simple_cpu-overload & simple_disk-useage to form a graph and showcase the last 30 days.
 minval=0
 maxval=100
