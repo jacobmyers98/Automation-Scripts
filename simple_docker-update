@@ -1,4 +1,10 @@
 #!/bin/bash
+
+
+# Author: Jacob M
+# Last edited on: 1/23/2024
+# Educational purposes only
+
 # change 'apt' to Linux OS of choice
 # run as root to avoid sudo 
 apt update
