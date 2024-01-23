@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# Author: Jacob M
+# Last edited on: 1/23/2024
+
 # script used to pull from a file and ping each host.
 
 # wipe file or create if not there
