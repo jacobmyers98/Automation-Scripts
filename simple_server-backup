@@ -1,5 +1,9 @@
 #!/bin/bash
 
+
+# Author: Jacob M
+# Last edited on: 1/23/2024
+
 # add name of server you want to backup as first option when running script.
 # ex. "./simple_server-backup game" will output "game_backup_(current date).tar.gz"
 
