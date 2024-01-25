@@ -2,6 +2,84 @@
 
 # Author: Jacob M
 # Last modified: 1/25/2024
+####Unfinished#####
 
 # Menu to update, restart, and pull on docker.
 
+function Update_Docker() {
+    echo ""
+cd /home/docker/docker_torrents && docker-compose up -d
+	echo ""
+}
+
+function cpu_check() {
+    echo ""
+	echo "CPU load on ${server_name} is: "
+    echo ""
+	uptime
+    echo ""
+}
+
+function tcp_check() {
+    echo ""
+	echo "TCP connections on ${server_name}: "
+    echo ""
+	cat  /proc/net/tcp | wc -l
+    echo ""
+}
+
+function kernel_check() {
+    echo ""
+	echo "Kernel version on ${server_name} is: "
+	echo ""
+	uname -r
+    echo ""
+}
+
+function all_checks() {
+	memory_check
+	cpu_check
+	tcp_check
+	kernel_check
+}
+
+##
+# Color  Variables
+##
+green='\e[32m'
+blue='\e[34m'
+clear='\e[0m'
+
+##
+# Color Functions
+##
+
+ColorGreen(){
+	echo -ne $green$1$clear
+}
+ColorBlue(){
+	echo -ne $blue$1$clear
+}
+
+menu(){
+echo -ne "
+My First Menu
+$(ColorGreen '1)') Update Docker
+$(ColorGreen '2)') Restart Docker
+$(ColorGreen '3)') Pull from Github 
+$(ColorGreen '4)') Docker ps
+$(ColorGreen '0)') Exit
+$(ColorBlue 'Choose an option:') "
+        read a
+        case $a in
+	        1) Update_Docker ; menu ;;
+	        2) Restart_Docker ; menu ;;
+	        3) Pull_GitHub ; menu ;;
+	        4) Docker_PS ; menu ;;
+		0) exit 0 ;;
+		*) echo -e $red"Wrong option."$clear; WrongCommand;;
+        esac
+}
+
+# Call the menu function
+menu
