@@ -29,4 +29,4 @@ fi
 
 # Delete anything 31 lines and older. Preps for gnuplot-graphic script
 # 31,$ means the range line 31 until the end, and d means to delete. Only the first 30 lines will remain. The -i flag tells sed to edit the file in-place.
-sed -i '31,$d' /home/user/disk_graphic.txt
+sed -i '31,$d' /home/user/disk_graphic.txt 2>/dev/null
