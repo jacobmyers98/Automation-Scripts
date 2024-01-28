@@ -40,7 +40,7 @@ set +x
 # if you can cd into backup directory then move the recent backup to that directory, and delete old backups else skip
 if cd /mnt/backup
     then
-    mv /mnt/Media/"$1_backup_$date.tar.gz" /mnt/backup/
+    mv /mnt/Media/"${1}_backup_$date.tar.gz" /mnt/backup/
 # deletes backup older than 3 months
     find /mnt/backup/*.tar.gz -mmin +131400 -delete
     chmod 744 /mnt/backup/*.tar.gz
