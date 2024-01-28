@@ -10,38 +10,21 @@
 function Update_Docker() {
     echo ""
 cd ${HOME}/docker_torrents && docker-compose up -d
-	echo ""
 }
 
-function cpu_check() {
+function Restart_Docker() {
     echo ""
-	echo "CPU load on ${server_name} is: "
-    echo ""
-	uptime
-    echo ""
+cd ${HOME}/docker_torrents && docker-compose down
 }
 
-function tcp_check() {
+function Pull_GitHub() {
     echo ""
-	echo "TCP connections on ${server_name}: "
-    echo ""
-	cat  /proc/net/tcp | wc -l
-    echo ""
+cd ${HOME}/docker_torrents && docker-compose pull
 }
 
-function kernel_check() {
+function Docker_PS() {
     echo ""
-	echo "Kernel version on ${server_name} is: "
-	echo ""
-	uname -r
-    echo ""
-}
-
-function all_checks() {
-	memory_check
-	cpu_check
-	tcp_check
-	kernel_check
+cd ${HOME}/docker_torrents && docker ps
 }
 
 ##
@@ -64,7 +47,7 @@ ColorBlue(){
 
 menu(){
 echo -ne "
-My First Menu
+Docker Menu
 $(ColorGreen '1)') Update Docker
 $(ColorGreen '2)') Restart Docker
 $(ColorGreen '3)') Pull from Github 
