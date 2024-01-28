@@ -28,7 +28,7 @@ chown -R www-data:www-data /var/www/pterodactyl/*
 
 php artisan queue:restart
 if
-  [ $? -eq 0]
+  [ $? -eq 0 ]
 then 
   echo "artisan restarted"
 else
@@ -38,7 +38,7 @@ fi
 
 php artisan up
 if
-  [ $? -eq 0]
+  [ $? -eq 0 ]
 then 
   echo "artisan up"
 else
@@ -48,7 +48,7 @@ fi
 
 systemctl stop wings
 if
-  [ $? -eq 0]
+  [ $? -eq 0 ]
 then 
   echo "wings stopped"
 else
@@ -61,7 +61,7 @@ chmod u+x /usr/local/bin/wings
 
 systemctl restart wings
 if
-  [ $? -eq 0]
+  [ $? -eq 0 ]
 then 
   echo "wings restarted"
 else
