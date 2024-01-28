@@ -1,9 +1,16 @@
 #!/bin/bash
 
 # Author: Jacob M
-# Last edited on: 1/24/2024
+# Last edited on: 1/27/2024
 
 # script used to pull from a file and ping each host, then test ssh/command in quotes and echo back if failure happens
+
+# If parameters dont have 1 then quit.
+if [[ $# -ne 1 ]]
+    then
+    echo "$0 needs a parameter of hosts to ssh to. Please provide a txt document."
+    exit 1
+fi
 
 # wipe file or create if not there
 echo -n "" > pinggood.txt
@@ -14,7 +21,7 @@ echo -n "" > failed.txt
 rm -f /tmp/stopit 2>/dev/null
 
 # maps the file to 'hosts' variable
-mapfile -t hosts < path/to/file.txt
+mapfile -t hosts < $1
 # for every line in variable
 for line in ${hosts[@]}
 
