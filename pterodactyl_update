@@ -15,7 +15,7 @@ php artisan down
 if [ $? -eq 0 ]
   then 
   echo "artisan down"
-else
+  else
   echo "$? failed" | tee -a ${HOME}/ptero_logs.txt
   exit
 fi
