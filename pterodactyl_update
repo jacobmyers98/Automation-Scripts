@@ -32,9 +32,9 @@ php artisan queue:restart
 # Dependency, if last command didnt work then echo reason for failure in log file
 if
   [ $? -eq 0 ]
-then 
+  then 
   echo "artisan restarted"
-else
+  else
   echo "$? failed" | tee -a ${HOME}/ptero_logs.txt
   exit
 fi
@@ -43,9 +43,9 @@ php artisan up
 if
 # Dependency, if last command didnt work then echo reason for failure in log file
   [ $? -eq 0 ]
-then 
+  then 
   echo "artisan up"
-else
+  else
   echo "$? failed" | tee -a ${HOME}/ptero_logs.txt
   exit
 fi
@@ -54,9 +54,9 @@ systemctl stop wings
 if
 # Dependency, if last command didnt work then echo reason for failure in log file
   [ $? -eq 0 ]
-then 
+  then 
   echo "wings stopped"
-else
+  else
   echo "$? failed" | tee -a ${HOME}/ptero_logs.txt
   exit
 fi
@@ -68,9 +68,9 @@ systemctl restart wings
 if
 # Dependency, if last command didnt work then echo reason for failure in log file
   [ $? -eq 0 ]
-then 
+  then 
   echo "wings restarted"
-else
+  else
   echo "$? failed" | tee -a ${HOME}/ptero_logs.txt
   exit
 fi
