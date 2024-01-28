@@ -5,26 +5,31 @@
 # Educational purposes only
 ####Unfinished#####
 
+
+# Sets user home, $HOME jumps to roots home dir so you cant utilize it
+USER_HOME=$(eval echo ~${SUDO_USER})
+
+
 # Menu to update, restart, and pull on docker.
 
 function Update_Docker() {
     echo ""
-cd ${HOME}/docker_torrents && docker-compose up -d
+cd ${USER_HOME}/docker_torrents && docker-compose up -d
 }
 
 function Restart_Docker() {
     echo ""
-cd ${HOME}/docker_torrents && docker-compose down
+cd ${USER_HOME}/docker_torrents && docker-compose down
 }
 
 function Pull_GitHub() {
     echo ""
-cd ${HOME}/docker_torrents && docker-compose pull
+cd ${USER_HOME}/docker_torrents && docker-compose pull
 }
 
 function Docker_PS() {
     echo ""
-cd ${HOME}/docker_torrents && docker ps
+cd ${USER_HOME}/docker_torrents && docker ps
 }
 
 ##
