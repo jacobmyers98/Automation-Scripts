@@ -16,8 +16,8 @@ host=$(hostname -s | cut -d'.'-f 1 | tr '[:upper:]' '[:lower:]')
 date=$(date '+%Y-%m-%d %H:%M:%S')
 
 # Throw ouput into .txt for graphical analysis
-touch '${HOME}/disk_graphic.txt'
-echo "$disk" >> '${HOME}/disk_graphic.txt'
+touch "${HOME}/disk_graphic.txt"
+echo "$disk" >> "${HOME}/disk_graphic.txt"
 
 # If the disk is labeled as "high" from 'awk' then put info in warning.txt in certain directory, else echo to CLI. If disk useage is greater than 85% then echo high useage to warning text else echo to startup on profile.
 if [ "$disk" -gt 85 ]
