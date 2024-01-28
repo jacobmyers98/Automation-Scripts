@@ -32,7 +32,7 @@ if
 then 
   echo "artisan restarted"
 else
-  echo "$? failed" | tee -a /logs/ptero.txt
+  echo "$? failed" | tee -a ${HOME}/ptero_logs.txt
   exit
 fi
 
@@ -42,7 +42,7 @@ if
 then 
   echo "artisan up"
 else
-  echo "$? failed" | tee -a /logs/ptero.txt
+  echo "$? failed" | tee -a ${HOME}/ptero_logs.txt
   exit
 fi
 
@@ -52,7 +52,7 @@ if
 then 
   echo "wings stopped"
 else
-  echo "$? failed" | tee -a /logs/ptero.txt
+  echo "$? failed" | tee -a ${HOME}/ptero_logs.txt
   exit
 fi
 
@@ -65,7 +65,7 @@ if
 then 
   echo "wings restarted"
 else
-  echo "$? failed" | tee -a /logs/ptero.txt
+  echo "$? failed" | tee -a ${HOME}/ptero_logs.txt
   exit
 fi
 
