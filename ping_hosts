@@ -1,9 +1,16 @@
 #!/bin/bash
 
 # Author: Jacob M
-# Last edited on: 1/23/2024
+# Last edited on: 1/27/2024
 
 # script used to pull from a file and ping each host.
+
+# If parameters dont equal 1 then exit
+if [[ $# -ne 1 ]]
+    then
+    echo "$0 needs a parameter for where the list is located"
+    exit 1
+fi
 
 # wipe file or create if not there
 echo -n "" > outputfile.txt
@@ -13,7 +20,7 @@ echo -n "" > timeout.txt
 # remove file in /tmp/ and throw output in bin, file is used to stop runaway script
 rm -f /tmp/stopit 2>/dev/null
 
-cat "path/to/dir/list.txt" | while read line
+cat "$1" | while read line
 
 do
 
