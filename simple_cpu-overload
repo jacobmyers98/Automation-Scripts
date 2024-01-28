@@ -13,8 +13,8 @@ cpu=$(top -n1 | awk '/^%Cpu/{if ($8 > 50)    {print "low"}    else {print "high"
 host=$(hostname -s | cut -d'.'-f 1 | tr '[:upper:]' '[:lower:]')
 
 # Throw ouput into .txt for graphical analysis
-touch '${HOME}/cpu_graphic.txt'
-echo "$cpu" >> '${HOME}/cpu_graphic.txt'
+touch "${HOME}/cpu_graphic.txt"
+echo "$cpu" >> "${HOME}/cpu_graphic.txt"
 
 # Make a variable called date with the date in year, month, day format and hour, minute, second format.
 date=$(date '+%Y-%m-%d %H:%M:%S')
