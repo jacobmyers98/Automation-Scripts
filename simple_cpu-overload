@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Author: Jacob M
-# Last edited on: 1/23/2024
+# Last edited on: 1/27/2024
 
 # Simple check of your cpu idle useage to determine if you're overloaded.
 # Attach to a cron job for automation
@@ -13,7 +13,8 @@ cpu=$(top -n1 | awk '/^%Cpu/{if ($8 > 50)    {print "low"}    else {print "high"
 host=$(hostname -s | cut -d'.'-f 1 | tr '[:upper:]' '[:lower:]')
 
 # Throw ouput into .txt for graphical analysis
-echo "$cpu" >> '/home/user/cpu_graphic.txt'
+touch '${HOME}/cpu_graphic.txt'
+echo "$cpu" >> '${HOME}/cpu_graphic.txt'
 
 # Make a variable called date with the date in year, month, day format and hour, minute, second format.
 date=$(date '+%Y-%m-%d %H:%M:%S')
