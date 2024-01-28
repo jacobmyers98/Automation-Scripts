@@ -30,6 +30,7 @@ sudo tar -czf /mnt/Media/"${1}_backup_${date}.tar.gz" \
     --exclude=/tmp \
     --exclude=/media \
     --exclude=/lost+found \
+    --exclude=/var/log \
     --exclude=/home/torrent/docker_torrents/mnt \
     /
 
