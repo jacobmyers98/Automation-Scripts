@@ -10,7 +10,7 @@
 disk=$(df -Ph /dev | awk 'NR == 2{print $5+0}')
   
 # Make a variable with hostname cutting out all the extra stuff, might need to tweak based on user preference.
-host=$(hostname -s | cut -d'.'-f 1 | tr '[:upper:]' '[:lower:]')
+host=$(hostname -s | tr '[:upper:]' '[:lower:]')    # cut -d'.'-f 1 was used in the middle, but is not needed for homelab
   
 # Make a variable called date with the date in year, month, day format and hour, minute, second format.
 date=$(date '+%Y-%m-%d %H:%M:%S')
@@ -22,7 +22,7 @@ echo "$disk" >> "${HOME}/disk_graphic.txt"
 # If the disk is labeled as "high" from 'awk' then put info in warning.txt in certain directory, else echo to CLI. If disk useage is greater than 85% then echo high useage to warning text else echo to startup on profile.
 if [ "$disk" -gt 85 ]
   then
-  echo "$host $date disk useage high!" >> /home/user/warning.txt
+  echo "$host $date disk useage high!" >> ${HOME}/warning.txt
   else
   echo "No issues with disk useage on $date"
 fi
