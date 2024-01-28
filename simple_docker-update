@@ -16,11 +16,10 @@ docker-compose down
 
 # Pulling new images
 docker-compose pull
-if
-  [ $? -eq 0 ]
-then 
+if [ $? -eq 0 ]
+  then 
   echo "pull successful"
-else
+  else
   echo "$? failed"
   exit
 fi
