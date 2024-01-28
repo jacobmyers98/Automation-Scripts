@@ -9,7 +9,7 @@
 # ensure you mount all partitions or backup will not complete
 # add folders you dont want backedup in list below
 
-if [[ $# -ne 1]]
+if [[ $# -ne 1 ]]
     then
     echo "$0 needs a name parameter for the backup"
     exit 1
