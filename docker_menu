@@ -5,6 +5,7 @@
 # Educational purposes only
 ####Unfinished#####
 
+# Run as sudo
 
 # Sets user home, $HOME jumps to roots home dir so you cant utilize it
 USER_HOME=$(eval echo ~${SUDO_USER})
@@ -19,7 +20,7 @@ cd ${USER_HOME}/docker_torrents && docker-compose up -d
 
 function Restart_Docker() {
     echo ""
-cd ${USER_HOME}/docker_torrents && docker-compose down
+cd ${USER_HOME}/docker_torrents && docker-compose restart
 }
 
 function Pull_GitHub() {
@@ -66,7 +67,7 @@ $(ColorBlue 'Choose an option:') "
 	        3) Pull_GitHub ; menu ;;
 	        4) Docker_PS ; menu ;;
 		0) exit 0 ;;
-		*) echo -e $red"Wrong option."$clear; WrongCommand;;
+		*) echo -e $red"Not an option."$clear; WrongCommand;;
         esac
 }
 
