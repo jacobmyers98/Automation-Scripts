@@ -5,7 +5,7 @@
 
 # Update for pterodactyl automated by simple_update.yml in ansible playbooks
 
-touch /logs/ptero.txt
+touch ${HOME}/ptero_logs.txt
 cd /var/www/pterodactyl
 
 php artisan down
@@ -14,7 +14,7 @@ if
 then 
   echo "artisan down"
 else
-  echo "$? failed" | tee -a /logs/ptero.txt
+  echo "$? failed" | tee -a ${HOME}/ptero_logs.txt
   exit
 fi
 
