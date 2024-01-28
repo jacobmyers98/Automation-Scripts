@@ -10,7 +10,7 @@ cd /var/www/pterodactyl
 
 php artisan down
 if
-  [ $? -eq 0]
+  [ $? -eq 0 ]
 then 
   echo "artisan down"
 else
