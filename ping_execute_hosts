@@ -21,7 +21,7 @@ for line in ${hosts[@]}
 do
 
 # send ping to /dev/null and send output to where input goes
-if ping -c 2 -W2 $line > /dev/null 2>&1
+if ping -c 2 -W2 $line &> /dev/null            #2>&1
     then
 # echo line in ping.txt without displaying to screen
     echo "$line" >> 'ping.txt'
