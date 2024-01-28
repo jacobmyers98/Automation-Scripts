@@ -4,11 +4,14 @@
 # Last edited on: 1/23/2024
 
 # Update for pterodactyl automated by simple_update.yml in ansible playbooks
+# Ensure to use root or sudo
 
+# Creates pterodactly log file
 touch ${HOME}/ptero_logs.txt
 cd /var/www/pterodactyl
 
 php artisan down
+# Dependency, if last command didnt work then echo reason for failure in log file
 if
   [ $? -eq 0 ]
 then 
@@ -27,6 +30,7 @@ php artisan migrate --seed --force
 chown -R www-data:www-data /var/www/pterodactyl/*
 
 php artisan queue:restart
+# Dependency, if last command didnt work then echo reason for failure in log file
 if
   [ $? -eq 0 ]
 then 
@@ -38,6 +42,7 @@ fi
 
 php artisan up
 if
+# Dependency, if last command didnt work then echo reason for failure in log file
   [ $? -eq 0 ]
 then 
   echo "artisan up"
@@ -48,6 +53,7 @@ fi
 
 systemctl stop wings
 if
+# Dependency, if last command didnt work then echo reason for failure in log file
   [ $? -eq 0 ]
 then 
   echo "wings stopped"
@@ -61,6 +67,7 @@ chmod u+x /usr/local/bin/wings
 
 systemctl restart wings
 if
+# Dependency, if last command didnt work then echo reason for failure in log file
   [ $? -eq 0 ]
 then 
   echo "wings restarted"
