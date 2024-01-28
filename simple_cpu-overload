@@ -10,7 +10,7 @@
 cpu=$(top -n1 | awk '/^%Cpu/{if ($8 > 50)    {print "low"}    else {print "high"} }')
   
 # Make a variable with hostname cutting out all the extra stuff, might need to tweak based on user preference.
-host=$(hostname -s | cut -d'.'-f 1 | tr '[:upper:]' '[:lower:]')
+host=$(hostname -s | tr '[:upper:]' '[:lower:]')     # cut -d'.'-f 1 was used in the middle, but is not needed for homelab
 
 # Throw ouput into .txt for graphical analysis
 touch "${HOME}/cpu_graphic.txt"
@@ -22,11 +22,11 @@ date=$(date '+%Y-%m-%d %H:%M:%S')
 # If the CPU is labeled as "high" from 'awk' then put info in warning.txt in certain directory, else echo to CLI.
 if [ "$cpu" = "high" ]
   then
-  echo "$host $date CPU overloaded" >> /home/user/warning.txt
+  echo "$host $date CPU overloaded" >> ${HOME}/warning.txt
   else
   echo "No issues with CPU utilization on $date"
 fi
 
 # Delete anything 31 lines and older. Preps for gnuplot-graphic script
 # 31,$ means the range line 31 until the end, and d means to delete. Only the first 30 lines will remain. The -i flag tells sed to edit the file in-place.
-sed -i '31,$d' /home/user/cpu_graphic.txt
+sed -i '31,$d' /home/user/cpu_graphic.txt 2>/dev/null
