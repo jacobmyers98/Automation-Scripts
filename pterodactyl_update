@@ -12,9 +12,8 @@ cd /var/www/pterodactyl
 
 php artisan down
 # Dependency, if last command didnt work then echo reason for failure in log file
-if
-  [ $? -eq 0 ]
-then 
+if [ $? -eq 0 ]
+  then 
   echo "artisan down"
 else
   echo "$? failed" | tee -a ${HOME}/ptero_logs.txt
