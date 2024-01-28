@@ -1,22 +1,23 @@
 #!/bin/bash
 
 # Author: Jacob M
-# Last edited on: 1/23/2024
+# Last edited on: 1/27/2024
 # Educational purposes only
 
 # change 'apt' to Linux OS of choice
-# run as root to avoid sudo 
+# run as root or sudo 
+
 apt update
 apt upgrade
 
 #path to docker dir
-cd /home/torrent/docker_torrents
+cd ${HOME}/docker_torrents
 docker-compose down
 
-#pulling new images
+# Pulling new images
 docker-compose pull
 if
-  [ $? -eq 0]
+  [ $? -eq 0 ]
 then 
   echo "pull successful"
 else
