@@ -1,14 +1,15 @@
 #!/bin/bash
 
 # Author: Jacob M
-# Last modified: 1/25/2024
+# Last modified: 1/27/2024
+# Educational purposes only
 ####Unfinished#####
 
 # Menu to update, restart, and pull on docker.
 
 function Update_Docker() {
     echo ""
-cd /home/docker/docker_torrents && docker-compose up -d
+cd ${HOME}/docker_torrents && docker-compose up -d
 	echo ""
 }
 
