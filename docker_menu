@@ -4,6 +4,7 @@
 # Last modified: 1/29/2024
 # Educational purposes only
 
+# Basic menu to help manage docker-compose images and containers
 # Run as sudo
 
 # Sets user home, $HOME jumps to roots home dir so you cant utilize it
