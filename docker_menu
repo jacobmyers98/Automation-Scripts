@@ -22,7 +22,7 @@ function Restart_Docker() {
 cd ${USER_HOME}/docker_torrents && docker-compose restart
 }
 
-function Pull_GitHub() {
+function Pull_Docker() {
     echo ""
 cd ${USER_HOME}/docker_torrents && docker-compose pull
 }
@@ -63,7 +63,7 @@ $(ColorBlue 'Choose an option:') "
         case $a in
 	        1) Update_Docker ; menu ;;
 	        2) Restart_Docker ; menu ;;
-	        3) Pull_GitHub ; menu ;;
+	        3) Pull_Docker ; menu ;;
 	        4) Docker_PS ; menu ;;
 		0) exit 0 ;;
 		*) echo -e $red"Not an option."$clear; WrongCommand;;
