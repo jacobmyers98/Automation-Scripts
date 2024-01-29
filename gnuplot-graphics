@@ -7,8 +7,8 @@
 #Uses simple_cpu-overload & simple_disk-useage to form a graph and showcase the last 30 days.
 minval=0
 maxval=100
-file='/home/user/cpu_graphic.txt'
-file2='/home/user/disk_graphic.txt'
+file="${HOME}/cpu_graphic.txt"
+file2="${HOME}/disk_graphic.txt"
 
 
 gnuplot --persist <<- EOF
