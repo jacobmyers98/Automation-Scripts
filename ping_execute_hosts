@@ -5,7 +5,7 @@
 
 # script used to pull from a file and ping each host, then test ssh/command in quotes and echo back if failure happens
 
-# If parameters dont have 1 then quit.
+# If parameters dont have 2 then quit.
 if [[ $# -ne 2 ]]
     then
     echo "${0} needs a parameter of hosts to ssh to. Please provide a txt document."
