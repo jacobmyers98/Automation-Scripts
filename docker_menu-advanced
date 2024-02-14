@@ -2,38 +2,15 @@
 
 # Author: Jacob M
 # Last edited on: 2/14/2024
-########Unfinished##########
 
 # Menu for automating and managing your entire environment through a script.
-########### Spacing (probably a better way to do this) ###########
-space=(echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo "")
+
+
 ########### Color Functions ###########
 
 green='\e[32m'
-blue='\e[34m'
 red='\e[31m'
 clear='\e[0m'
-
-ColorGreen(){
-	echo -ne $green$1$clear
-}
-ColorBlue(){
-	echo -ne $blue$1$clear
-}
 
 ############################################################################################
 
@@ -41,14 +18,14 @@ function docker_c
 {
  option=0
  until [ "$option" = "4" ]; do
- echo "$(ColorGreen '1'.) Show Containers"
- echo "  2.) Compose Pull"
- echo "  3.) Compose Update"
- echo "  4.) Return to menu"
+ echo -e "${green}  1.)${clear} Show Containers"
+ echo -e "${green}  2.)${clear} Compose Pull"
+ echo -e "${green}  3.)${clear} Compose Update"
+ echo -e "${green}  4.)${clear} Return to menu"
 
  echo -n "Enter choice: "
  read option
- echo ""
+ printf '\n%.0s' `seq 1 40`
  case $option in
  1 ) docker ps;;
  2 ) docker-compose pull;;
@@ -65,14 +42,14 @@ function kubernetes_c
 {
  option=0
  until [ "$option" = "4" ]; do
- echo "  1.) Get Pods"
- echo "  2.) Get Services"
- echo "  3.) Get Version"
- echo "  4.) Return to menu"
+ echo -e "${green}  1.)${clear} Get Pods"
+ echo -e "${green}  2.)${clear} Get Services"
+ echo -e "${green}  3.)${clear} Get Version"
+ echo -e "${green}  4.)${clear} Return to menu"
 
  echo -n "Enter choice: "
  read option
- echo ""
+ printf '\n%.0s' `seq 1 40`
  case $option in
  1 ) microk8s kubectl get pods ;;
  2 ) microk8s kubectl get services ;;
@@ -89,14 +66,14 @@ function pterodactyl_c
 {
  option=0
  until [ "$option" = "4" ]; do
- echo "  1.) Wings Status"
- echo "  2.) Wings On"
- echo "  3.) Wings Off"
- echo "  4.) Return to menu"
+ echo -e "${green}  1.)${clear} Wings Status"
+ echo -e "${green}  2.)${clear} Wings On"
+ echo -e "${green}  3.)${clear} Wings Off"
+ echo -e "${green}  4.)${clear} Return to menu"
 
  echo -n "Enter choice: "
  read option
- echo ""
+ printf '\n%.0s' `seq 1 40`
  case $option in
  1 ) systemctl status wings ;;
  2 ) systemctl start wings ;;
@@ -113,15 +90,15 @@ function main_menu
 {
 option=0
 until [ "$option" = "5" ]; do
-echo "  1.) Docker Commands"
-echo "  2.) Kubernetes Commands"
-echo "  3.) Pterodactyl Commands"
-echo "  4.) System Resources"
-echo "  5.) Quit"
+echo -e "${green}  1.)${clear} Docker Commands"
+echo -e "${green}  2.)${clear} Kubernetes Commands"
+echo -e "${green}  3.)${clear} Pterodactyl Commands"
+echo -e "${green}  4.)${clear} System Resources"
+echo -e "${green}  5.)${clear} Quit"
 
 echo -n "Enter choice: "
 read option
-${space}
+printf '\n%.0s' `seq 1 40`
 case $option in
     1 ) docker_c; press_enter ;;              # docker commands
     2 ) kubernetes_c; press_enter ;;          # kubernetes commands
