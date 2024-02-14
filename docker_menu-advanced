@@ -25,7 +25,7 @@ function docker_c
 {
  option=0
  until [ "$option" = "4" ]; do
- echo "  1.) Show Containers"
+ echo "$(ColorGreen '1'.) Show Containers"
  echo "  2.) Compose Pull"
  echo "  3.) Compose Update"
  echo "  4.) Return to menu"
@@ -38,7 +38,7 @@ function docker_c
  2 ) docker-compose pull;;
  3 ) docker-compose up -d ;;
  4 ) main_menu ;;
- * ) tput setf 4;echo "Please choose a Docker selection";tput setf 4; 
+ * ) tput setf 4;echo $red"Please choose a Docker selection"$clear;tput setf 4; 
  esac
 #   }
  done
@@ -62,7 +62,7 @@ function kubernetes_c
  2 ) microk8s kubectl get services ;;
  3 ) microk8s kubectl version ;;
  4 ) main_menu; press_enter ;;
- * ) tput setf 4;echo "Please choose a Kubernetes selection";tput setf 4; 
+ * ) tput setf 4;echo $red"Please choose a Kubernetes selection"$clear;tput setf 4; 
  esac
 #   }
  done
@@ -86,7 +86,7 @@ function pterodactyl_c
  2 ) systemctl start wings ;;
  3 ) systemctl stop wings ;;
  4 ) main_menu; press_enter ;;
- * ) tput setf 4;echo "Please choose a Pterodactyl selection";tput setf 3; 
+ * ) tput setf 4;echo $red"Please choose a Pterodactyl selection"$clear;tput setf 3; 
  esac
 #   }
  done
@@ -112,7 +112,7 @@ case $option in
     3 ) pterodactyl_c; press_enter ;;         # pterodactly commands
     4 ) lsblk; free ;;                        # sys resources
     5 ) exit;;
-    * ) tput setf 5;echo "Please make a selection from the choices";tput setf 5; 
+    * ) tput setf 5;echo $red"Please make a selection from the choices"$clear;tput setf 5; 
 esac
 done
  }
