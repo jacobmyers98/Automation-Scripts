@@ -33,7 +33,7 @@ function docker_c
 function kubernetes_c 
 {
  option=0
- until [ "$option" = "2" ]; do
+ until [ "$option" = "4" ]; do
  echo "  1.) Get Pods"
  echo "  2.) Get Services"
  echo "  3.) Get Version"
@@ -57,7 +57,7 @@ function kubernetes_c
 function pterodactyl_c
 {
  option=0
- until [ "$option" = "3" ]; do
+ until [ "$option" = "4" ]; do
  echo "  1.) Wings Status"
  echo "  2.) Wings On"
  echo "  3.) Wings Off"
