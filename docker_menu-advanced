@@ -4,7 +4,22 @@
 # Last edited on: 2/14/2024
 ########Unfinished##########
 
-# Menu for automating and managing your entire environment through a script. 
+# Menu for automating and managing your entire environment through a script.
+
+########### Color Functions ###########
+
+green='\e[32m'
+blue='\e[34m'
+clear='\e[0m'
+
+ColorGreen(){
+	echo -ne $green$1$clear
+}
+ColorBlue(){
+	echo -ne $blue$1$clear
+}
+
+############################################################################################
 
 function docker_c
 {
