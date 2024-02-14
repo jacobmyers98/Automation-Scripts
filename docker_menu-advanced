@@ -1,7 +1,105 @@
 #!/bin/bash
 
 # Author: Jacob M
-# Last edited on: 1/29/2024
+# Last edited on: 2/14/2024
 ########Unfinished##########
 
-# Menu for automating and managing your entire docker environment through a script. 
+# Menu for automating and managing your entire environment through a script. 
+
+function docker_c
+{
+ option=0
+ until [ "$option" = "4" ]; do
+ echo "  1.) Show Containers"
+ echo "  2.) Compose Pull"
+ echo "  3.) Compose Update"
+ echo "  4.) Return to menu"
+
+ echo -n "Enter choice: "
+ read option
+ echo ""
+ case $option in
+ 1 ) docker ps;;
+ 2 ) docker-compose pull;;
+ 3 ) docker-compose up -d ;;
+ 4 ) main_menu ;;
+ * ) tput setf 4;echo "Please choose a Docker selection";tput setf 4; 
+ esac
+#   }
+ done
+}
+############################################################################################
+
+function kubernetes_c 
+{
+ option=0
+ until [ "$option" = "2" ]; do
+ echo "  1.) Get Pods"
+ echo "  2.) Get Services"
+ echo "  3.) Get Version"
+ echo "  4.) Return to menu"
+
+ echo -n "Enter choice: "
+ read option
+ echo ""
+ case $option in
+ 1 ) microk8s kubectl get pods ;;
+ 2 ) microk8s kubectl get services ;;
+ 3 ) microk8s kubectl version ;;
+ 4 ) main_menu; press_enter ;;
+ * ) tput setf 4;echo "Please choose a Kubernetes selection";tput setf 4; 
+ esac
+#   }
+ done
+}
+############################################################################################
+
+function pterodactyl_c
+{
+ option=0
+ until [ "$option" = "3" ]; do
+ echo "  1.) Wings Status"
+ echo "  2.) Wings On"
+ echo "  3.) Wings Off"
+ echo "  4.) Return to menu"
+
+ echo -n "Enter choice: "
+ read option
+ echo ""
+ case $option in
+ 1 ) systemctl status wings ;;
+ 2 ) systemctl start wings ;;
+ 3 ) systemctl stop wings ;;
+ 4 ) main_menu; press_enter ;;
+ * ) tput setf 4;echo "Please choose a Pterodactyl selection";tput setf 3; 
+ esac
+#   }
+ done
+}
+############################################################################################
+
+function main_menu 
+{
+option=0
+until [ "$option" = "5" ]; do
+echo "  1.) Docker Commands"
+echo "  2.) Kubernetes Commands"
+echo "  3.) Pterodactyl Commands"
+echo "  4.) System Resources"
+echo "  5.) Quit"
+
+echo -n "Enter choice: "
+read option
+echo ""
+case $option in
+    1 ) docker_c; press_enter ;;              # docker commands
+    2 ) kubernetes_c; press_enter ;;          # kubernetes commands
+    3 ) pterodactyl_c; press_enter ;;         # pterodactly commands
+    4 ) lsblk; free ;;                        # sys resources
+    5 ) exit;;
+    * ) tput setf 5;echo "Please make a selection from the choices";tput setf 5; 
+esac
+done
+ }
+
+main_menu
