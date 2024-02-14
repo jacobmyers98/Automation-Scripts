@@ -86,7 +86,7 @@ function pterodactyl_c
  2 ) systemctl start wings ;;
  3 ) systemctl stop wings ;;
  4 ) main_menu; press_enter ;;
- * ) tput setf 4;echo $red"Please choose a Pterodactyl selection"$clear;tput setf 3; 
+ * ) echo $red"Please choose a Pterodactyl selection"$clear 
  esac
 #   }
  done
