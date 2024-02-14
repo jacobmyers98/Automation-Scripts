@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Author: Jacob M
-# Last modified: 1/29/2024
+# Last modified: 2/14/2024
 # Educational purposes only
 
 # Basic menu to help manage docker-compose images and containers
@@ -39,6 +39,7 @@ cd ${USER_HOME}/docker_torrents && docker ps
 green='\e[32m'
 blue='\e[34m'
 clear='\e[0m'
+red='\e[31m'
 
 ##
 # Color Functions
@@ -67,7 +68,7 @@ $(ColorBlue 'Choose an option:') "
 	        3) Pull_Docker ; menu ;;
 	        4) Docker_PS ; menu ;;
 		0) exit 0 ;;
-		*) echo -e $red"Not an option."$clear; WrongCommand;;
+		*) echo -e "${red}Not an option.${clear}; WrongCommand;;
         esac
 }
 
