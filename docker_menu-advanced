@@ -100,10 +100,10 @@ echo -n "Enter choice: "
 read option
 printf '\n%.0s' `seq 1 40`
 case $option in
-    1 ) docker_c; press_enter ;;              # docker commands
-    2 ) kubernetes_c; press_enter ;;          # kubernetes commands
-    3 ) pterodactyl_c; press_enter ;;         # pterodactly commands
-    4 ) lsblk; free ;;                        # sys resources
+    1 ) docker_c; press_enter ;;                       # docker commands
+    2 ) kubernetes_c; press_enter ;;                   # kubernetes commands
+    3 ) pterodactyl_c; press_enter ;;                  # pterodactly commands
+    4 ) lsblk; free; printf '\n%.0s' `seq 1 3` ;;      # sys resources
     5 ) exit;;
     * ) echo -e "${red}Please make a valid selection!"${clear}
 esac
