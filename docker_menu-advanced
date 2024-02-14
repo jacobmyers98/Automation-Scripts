@@ -112,7 +112,7 @@ case $option in
     3 ) pterodactyl_c; press_enter ;;         # pterodactly commands
     4 ) lsblk; free ;;                        # sys resources
     5 ) exit;;
-    * ) tput setf 5;echo $red"Please make a selection from the choices"$clear;tput setf 5; 
+    * ) tput setf 5;echo "$red Please make a selection from the choices $clear";tput setf 5; 
 esac
 done
  }
