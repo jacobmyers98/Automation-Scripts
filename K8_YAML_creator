@@ -16,15 +16,44 @@ else
 apiversion=
 fi
 
+printf '\n%.0s' `seq 1 3`
+
 echo "apiVersion: ${apiversion}v1
 kind: ${kind}
 metadata:"
 
 read -t 60 -p 'Input the name under metadata:' name
 
+printf '\n%.0s' `seq 1 3`
+
 echo "apiVersion: ${apiversion}v1
 kind: ${kind}
 metadata:
   name: ${name}"
+
+
+if [ ${kind} != Namespace ]; then
+namespacev=  namespace:
+microk8s kubectl get namespace
+read -t 60 -p 'Input the Namespace under metadata:' namespace
+echo "apiVersion: ${apiversion}v1
+kind: ${kind}
+metadata:
+  name: ${name}
+  ${namespacev} ${namespace}"
+fi
+
+printf '\n%.0s' `seq 1 3`
+
+
+
+
+
+
+
+
+
+
+
 
 exit
