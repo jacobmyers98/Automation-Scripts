@@ -6,43 +6,34 @@
 ######Unfinished#######
 # Kubernetes YAML creation tool for Namespace, Pods, Roles, and Deployments.
 
-echo "apiVersion: v1
-kind:"
 
 read -t 60 -p 'Input the kind of K8 YAML, ex: Deployment, Pod, Role, Namespace, Service:' kind
-if [ ${kind} == Role ]; then
+if [ ${kind} = Role ]; then
 apiversion=rbac.authorization.k8s.io/
 else
 apiversion=
 fi
 
-printf '\n%.0s' `seq 1 3`
-
 echo "apiVersion: ${apiversion}v1
-kind: ${kind}
-metadata:"
+kind: ${kind}" >> K8.yaml
+
+cat K8.yaml
+printf '\n%.0s' `seq 1 3`
 
 read -t 60 -p 'Input the name under metadata:' name
-
+cat K8.yaml
 printf '\n%.0s' `seq 1 3`
 
-echo "apiVersion: ${apiversion}v1
-kind: ${kind}
-metadata:
-  name: ${name}"
-
+echo "metadata:
+  name: ${name}" >> K8.yaml
 
 if [ ${kind} != Namespace ]; then
-namespacev=  namespace:
 microk8s kubectl get namespace
 read -t 60 -p 'Input the Namespace under metadata:' namespace
-echo "apiVersion: ${apiversion}v1
-kind: ${kind}
-metadata:
-  name: ${name}
-  ${namespacev} ${namespace}"
+echo "  namespace: ${namespace}" >> K8.yaml
 fi
 
+cat K8.yaml
 printf '\n%.0s' `seq 1 3`
 
 
