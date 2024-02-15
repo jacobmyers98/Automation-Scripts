@@ -52,19 +52,20 @@ set -f
 read -t 60 -p 'Do you have an apiGroup ? leave blank if no, put in quotes:' apigroup
 read -t 60 -p 'What are your resources ? ex. pods, nodes, deployments, services, crontabs, jobs, or *. Put in quotes:' resources
 read -t 60 -p 'What are your resourceNames ? Put in quotes:' resourcenames
-read -t 60 -p 'What are your verbs ? ex. get, list, watch, create, update, patch, delete, or *. Put in quotes with a comma as seperation:' verb
+read -t 60 -p 'What are your verbs ? ex. get, list, watch, create, update, patch, delete, or *:' verb
 
 verbs=$( echo $verb | sed -e 's/ /", "/g' )
 
 echo "rules:
 - apiGroups: [ ${apigroup} ]
-  resources: [ ${resources} ]
+  resources: [ "\""${resources}"\"" ]
   resourceNames: [ "\""${resourcenames}"\"" ]
   verbs: [ ${q}${verbs}${q} ]" >> K8.yaml
-
 set +f
-
 fi
+
+cat K8.yaml
+printf '\n%.0s' `seq 1 5`
 
 
 
