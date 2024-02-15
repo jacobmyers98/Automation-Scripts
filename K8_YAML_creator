@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Author: Jacob M
+# Last edited on: 2/15/2024
+
+######Unfinished#######
+# Kubernetes YAML creation tool for Namespace, Pods, Roles, and Deployments.
+
+echo "apiVersion: v1
+kind:"
+
+read -t 60 -p 'Input the kind of K8 YAML, ex: Deployment, Pod, Role, Namespace, Service:' kind
+if [ ${kind} == Role ]; then
+
+apiversion=rbac.authorization.k8s.io/
+echo "apiVersion: ${apiversion}v1
+kind: ${kind}"
+
+else
+
+echo "apiVersion: v1
+kind: ${kind}"
+
+fi
+
+
+echo "apiVersion: v1
+kind: ${kind}
+metadata:
+  name: ${name}
