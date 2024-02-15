@@ -57,7 +57,7 @@ read -t 60 -p 'What are your verbs ? ex. get, list, watch, create, update, patch
 verbs=$( echo $verb | sed -e 's/ /", "/g' )
 
 echo "rules:
-- apiGroups: [ ${apigroup} ]
+- apiGroups: [ "\""${apigroup}"\"" ]
   resources: [ "\""${resources}"\"" ]
   resourceNames: [ "\""${resourcenames}"\"" ]
   verbs: [ ${q}${verbs}${q} ]" >> K8.yaml
@@ -66,6 +66,14 @@ fi
 
 cat K8.yaml
 printf '\n%.0s' `seq 1 5`
+
+
+if [ ${kind} = Service ]; then
+read -t 60 -p 'How many ports do you want open ?' portopen
+
+read -t 60 -p 'what protocol do you want for this port ?' protocol
+read -t 60 -p 'what is the host port number you want to open ?' porthost
+read -t 60 -p 'what is the target (container) port number you want to open ?' containerport
 
 
 
