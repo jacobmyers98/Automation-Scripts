@@ -8,11 +8,22 @@
 # Clears and makes file
 echo -n "" > K8.yaml
 
+# Color functions
+green='\e[32m'
+red='\e[31m'
+clear='\e[0m'
+
 read -t 60 -p 'Input the kind of K8 YAML, ex: Deployment, Pod, Role, Namespace, Service:' kind
 if [ ${kind} = Role ]; then
 apiversion=rbac.authorization.k8s.io/
-else
-apiversion=
+fi
+
+if [ ${kind} = Deployment ]; then
+apiversion=apps/
+fi
+
+if [ ${kind} != Deployment ] && [ ${kind} != Role ]; then
+apiversion=''
 fi
 
 # Creates apiVersion based on what Kind you select
@@ -30,21 +41,21 @@ echo "metadata:
   name: ${name}" >> K8.yaml
 
 # If namespace then add dependencies
-if [ ${kind} != Namespace ]; then
-microk8s kubectl get namespace
-read -t 60 -p 'Input the Namespace under metadata:' namespace
-echo "  namespace: ${namespace}" >> K8.yaml
-printf '\n%.0s' `seq 1 2`
-cat K8.yaml
-printf '\n%.0s' `seq 1 5`
-echo "This is your final Namespace yaml."
-else
+if [ ${kind} = Namespace ]; then
 echo "  labels:
     name: ${name}" >> K8.yaml
 printf '\n%.0s' `seq 1 2`
 cat K8.yaml
 printf '\n%.0s' `seq 1 5`
+echo -e "${red}This is your final Namespace yaml." ${clear}
 exit
+else
+microk8s kubectl get namespace
+read -t 60 -p 'Input the Namespace under metadata:' namespace
+echo "  namespace: ${namespace}" >> K8.yaml
+cat K8.yaml
+printf '\n%.0s' `seq 1 5`
+
 fi
 
 
@@ -73,7 +84,7 @@ set +f
 printf '\n%.0s' `seq 1 2`
 cat K8.yaml
 printf '\n%.0s' `seq 1 5`
-echo "This is your final Role yaml."
+echo -e "${red}This is your final Role yaml."${clear}
 fi
 
 
@@ -94,7 +105,7 @@ done
 printf '\n%.0s' `seq 1 2`
 cat K8.yaml
 printf '\n%.0s' `seq 1 5`
-echo "This is your final Service yaml."
+echo -e "${red}This is your final Service yaml." ${clear}
 fi
 
 
@@ -111,7 +122,7 @@ echo "  - name: ${name}-${image}
 printf '\n%.0s' `seq 1 2`
 cat K8.yaml
 printf '\n%.0s' `seq 1 5`
-echo "This is your final Pod yaml."
+echo -e "${red}This is your final Pod yaml." ${clear}
 fi
 
 
@@ -137,8 +148,9 @@ done
 printf '\n%.0s' `seq 1 2`
 cat K8.yaml
 printf '\n%.0s' `seq 1 5`
-echo "This is your final Deployment yaml."
+echo -e "${red}This is your final Deployment yaml." ${clear}
 fi
+
 
 
 exit
