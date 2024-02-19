@@ -32,17 +32,20 @@ if [ ${kind} != Namespace ]; then
 microk8s kubectl get namespace
 read -t 60 -p 'Input the Namespace under metadata:' namespace
 echo "  namespace: ${namespace}" >> K8.yaml
-else
-echo "  labels:
-    name: ${name}" >> K8.yaml
+printf '\n%.0s' `seq 1 2`
 cat K8.yaml
 printf '\n%.0s' `seq 1 5`
 echo "This is your final Namespace yaml."
+else
+echo "  labels:
+    name: ${name}" >> K8.yaml
+printf '\n%.0s' `seq 1 2`
+cat K8.yaml
+printf '\n%.0s' `seq 1 5`
 exit
 fi
 
-cat K8.yaml
-printf '\n%.0s' `seq 1 5`
+
 
 # q used inside an echo command with {"} is problematic so q is defined as {"} 
 q='"'
@@ -62,10 +65,12 @@ echo "rules:
   resourceNames: [ "\""${resourcenames}"\"" ]
   verbs: [ ${q}${verbs}${q} ]" >> K8.yaml
 set +f
+printf '\n%.0s' `seq 1 2`
 cat K8.yaml
 printf '\n%.0s' `seq 1 5`
 echo "This is your final Role yaml."
 fi
+
 
 
 if [ ${kind} = Service ]; then
@@ -81,10 +86,12 @@ echo "    - protocol: ${protocol}
       port: ${porthost}
       targetPort: ${containerport}" >> K8.yaml
 done
+printf '\n%.0s' `seq 1 2`
 cat K8.yaml
 printf '\n%.0s' `seq 1 5`
 echo "This is your final Service yaml."
 fi
+
 
 
 if [ ${kind} = Pod ]; then
@@ -96,10 +103,12 @@ echo "  - name: ${name}-${image}
     image: ${image}
     ports:
     - containerPort: ${containerport2}" >> K8.yaml
+printf '\n%.0s' `seq 1 2`
 cat K8.yaml
 printf '\n%.0s' `seq 1 5`
 echo "This is your final Pod yaml."
 fi
+
 
 
 if [ ${kind} = Deployment ]; then
@@ -119,6 +128,7 @@ echo "      - name: ${name}-${image2}
         ports:
         - containerPort: ${containerport3}" >> K8.yaml
 done
+printf '\n%.0s' `seq 1 2`
 cat K8.yaml
 printf '\n%.0s' `seq 1 5`
 echo "This is your final Deployment yaml."
