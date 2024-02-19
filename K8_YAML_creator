@@ -3,9 +3,9 @@
 # Author: Jacob M
 # Last edited on: 2/19/2024
 
-######Unfinished#######
 # Kubernetes YAML creation tool for Namespace, Services, Pods, Roles, and Deployments.
 
+# Clears and makes file
 echo -n "" > K8.yaml
 
 read -t 60 -p 'Input the kind of K8 YAML, ex: Deployment, Pod, Role, Namespace, Service:' kind
@@ -15,6 +15,7 @@ else
 apiversion=
 fi
 
+# Creates apiVersion based on what Kind you select
 echo "apiVersion: ${apiversion}v1
 kind: ${kind}" >> K8.yaml
 
@@ -28,6 +29,7 @@ printf '\n%.0s' `seq 1 5`
 echo "metadata:
   name: ${name}" >> K8.yaml
 
+# If namespace then add dependencies
 if [ ${kind} != Namespace ]; then
 microk8s kubectl get namespace
 read -t 60 -p 'Input the Namespace under metadata:' namespace
@@ -50,6 +52,7 @@ fi
 # q used inside an echo command with {"} is problematic so q is defined as {"} 
 q='"'
 
+# If role then add dependencies
 if [ ${kind} = Role ]; then
 set -f
 read -t 60 -p 'Do you have an apiGroup ? leave blank if no:' apigroup
@@ -57,8 +60,10 @@ read -t 60 -p 'What are your resources ? ex. pods, nodes, deployments, services,
 read -t 60 -p 'What are your resourceNames ?' resourcenames
 read -t 60 -p 'What are your verbs ? ex. get, list, watch, create, update, patch, delete, or *:' verb
 
+# Sed command takes verbs specified and adds them to yaml in readable K8 format
 verbs=$( echo $verb | sed -e 's/ /", "/g' )
 
+# "\"" and ${q} do the same thing, add qutoes inside a echo command
 echo "rules:
 - apiGroups: [ "\""${apigroup}"\"" ]
   resources: [ "\""${resources}"\"" ]
@@ -72,7 +77,7 @@ echo "This is your final Role yaml."
 fi
 
 
-
+# If service then add dependencies
 if [ ${kind} = Service ]; then
 read -t 60 -p 'How many ports do you want open ? ex. 1,2,3,4.' portopen
 echo "  ports:" >> K8.yaml
@@ -93,7 +98,7 @@ echo "This is your final Service yaml."
 fi
 
 
-
+# If Pod then add dependencies
 if [ ${kind} = Pod ]; then
 echo "spec:
   containers:" >> K8.yaml
@@ -111,6 +116,7 @@ fi
 
 
 
+# If deployment then add dependencies
 if [ ${kind} = Deployment ]; then
 echo "spec:" >> K8.yaml
 read -t 60 -p 'how many replicas do you want ?' replicas
