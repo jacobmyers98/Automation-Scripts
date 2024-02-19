@@ -51,7 +51,8 @@ echo -e "${red}This is your final Namespace yaml." ${clear}
 exit
 else
 microk8s kubectl get namespace
-read -t 60 -p 'Input the Namespace under metadata:' namespace
+printf '\n%.0s' `seq 1 2`
+read -t 60 -p 'Input the namespace under metadata:' namespace
 echo "  namespace: ${namespace}" >> K8.yaml
 cat K8.yaml
 printf '\n%.0s' `seq 1 5`
