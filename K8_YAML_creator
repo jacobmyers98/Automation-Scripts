@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Author: Jacob M
-# Last edited on: 2/15/2024
+# Last edited on: 2/19/2024
 
 ######Unfinished#######
-# Kubernetes YAML creation tool for Namespace, Pods, Roles, and Deployments.
+# Kubernetes YAML creation tool for Namespace, Services, Pods, Roles, and Deployments.
 
 echo -n "" > K8.yaml
 
@@ -37,7 +37,7 @@ echo "  labels:
     name: ${name}" >> K8.yaml
 cat K8.yaml
 printf '\n%.0s' `seq 1 5`
-echo "Namespace complete"
+echo "This is your final Namespace yaml."
 exit
 fi
 
@@ -49,9 +49,9 @@ q='"'
 
 if [ ${kind} = Role ]; then
 set -f
-read -t 60 -p 'Do you have an apiGroup ? leave blank if no, put in quotes:' apigroup
-read -t 60 -p 'What are your resources ? ex. pods, nodes, deployments, services, crontabs, jobs, or *. Put in quotes:' resources
-read -t 60 -p 'What are your resourceNames ? Put in quotes:' resourcenames
+read -t 60 -p 'Do you have an apiGroup ? leave blank if no:' apigroup
+read -t 60 -p 'What are your resources ? ex. pods, nodes, deployments, services, crontabs, jobs, or *:' resources
+read -t 60 -p 'What are your resourceNames ?' resourcenames
 read -t 60 -p 'What are your verbs ? ex. get, list, watch, create, update, patch, delete, or *:' verb
 
 verbs=$( echo $verb | sed -e 's/ /", "/g' )
@@ -62,21 +62,67 @@ echo "rules:
   resourceNames: [ "\""${resourcenames}"\"" ]
   verbs: [ ${q}${verbs}${q} ]" >> K8.yaml
 set +f
-fi
-
 cat K8.yaml
 printf '\n%.0s' `seq 1 5`
+echo "This is your final Role yaml."
+fi
 
 
 if [ ${kind} = Service ]; then
-read -t 60 -p 'How many ports do you want open ?' portopen
+read -t 60 -p 'How many ports do you want open ? ex. 1,2,3,4.' portopen
+echo "  ports:" >> K8.yaml
+for i in $(seq $portopen)
+do
 
-read -t 60 -p 'what protocol do you want for this port ?' protocol
+read -t 60 -p 'what protocol (TCP or UDP) do you want for this port ?' protocol
 read -t 60 -p 'what is the host port number you want to open ?' porthost
 read -t 60 -p 'what is the target (container) port number you want to open ?' containerport
+echo "    - protocol: ${protocol}
+      port: ${porthost}
+      targetPort: ${containerport}" >> K8.yaml
+done
+cat K8.yaml
+printf '\n%.0s' `seq 1 5`
+echo "This is your final Service yaml."
+fi
 
 
+if [ ${kind} = Pod ]; then
+echo "spec:
+  containers:" >> K8.yaml
+read -t 60 -p 'what image do you want to use ?' image
+read -t 60 -p 'what port do you want to use?' containerport2
+echo "  - name: ${name}-${image}
+    image: ${image}
+    ports:
+    - containerPort: ${containerport2}" >> K8.yaml
+cat K8.yaml
+printf '\n%.0s' `seq 1 5`
+echo "This is your final Pod yaml."
+fi
 
+
+if [ ${kind} = Deployment ]; then
+echo "spec:" >> K8.yaml
+read -t 60 -p 'how many replicas do you want ?' replicas
+echo "  replicas: ${replicas}
+  template:
+    spec:
+      containers:" >> K8.yaml
+read -t 60 -p 'How many containers do you want ? ex. 1,2,3,4.' containersdep
+for i in $(seq $containersdep)
+do
+read -t 60 -p 'what image do you want to use ?' image2
+read -t 60 -p 'what port do you want to use?' containerport3
+echo "      - name: ${name}-${image2}
+        image: ${image2}
+        ports:
+        - containerPort: ${containerport3}" >> K8.yaml
+done
+cat K8.yaml
+printf '\n%.0s' `seq 1 5`
+echo "This is your final Deployment yaml."
+fi
 
 
 exit
