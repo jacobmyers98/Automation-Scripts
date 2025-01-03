@@ -1,0 +1,5 @@
+For node in $(kubectl get nodes -o name 2>/dev/null); do
+      echo "Node: $node"
+      kubectl describe $node 2>/dev/null | grep -E "cpu|memory" | tail -n 2
+      echo "--------------------------------------------"
+done
